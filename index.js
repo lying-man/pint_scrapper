@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
+app.get("/api", (req, res) => res.json("working"));
+
 app.post("/api/parse", async (req, res) => {
     const { profileName, amountParsePins, access } = req.body;
 

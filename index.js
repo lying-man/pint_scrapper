@@ -1,11 +1,13 @@
 const puppeteer = require("puppeteer");
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 
 //server code
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cors());
 app.use(express.json());
 
 app.post("/api/parse", async (req, res) => {
@@ -124,3 +126,5 @@ function filterUniqueLinks(list) { return Array.from(new Set(list)); }
 
 //launch server
 app.listen(PORT, () => console.log("server has been on port " + PORT));
+
+module.exports = app;

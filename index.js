@@ -1,5 +1,5 @@
-const puppeteer = require("puppeteer");
 const express = require("express");
+const puppeteer = require("puppeteer");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -7,10 +7,10 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
-app.get("/api", (req, res) => res.json("working"));
+app.get("/api", (req, res) => res.json({text: "working"}));
 
 app.post("/api/parse", async (req, res) => {
     const { profileName, amountParsePins, access } = req.body;
@@ -122,7 +122,7 @@ const startParser = async (username, needParsePinsCount, needArgs = false) => {
 
 //delay functionality
 function randomIntFromInterval(min, max) { return Math.floor(Math.random() * (max - min + 1) + min) }
-const delay = async (ms) => new Promise((res) => setTimeout(res, ms * 1000));
+async function delay(ms) { return new Promise((res) => setTimeout(res, ms * 1000)) }
 
 function filterUniqueLinks(list) { return Array.from(new Set(list)); }
 

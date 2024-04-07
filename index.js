@@ -17,8 +17,13 @@ app.post("/api/parse", async (req, res) => {
     //check access user
     if (process.env.ACCESS !== access) return res.json({ error: "Access denieded" });
 
-    let result = await startParser(profileName, amountParsePins);
-    res.json(result);
+    try {
+
+        let result = await startParser(profileName, amountParsePins);
+        res.json(result);
+
+    } catch(e) { res.json(e); }
+
 });
 
 const pinterestPath = "https://pinterest.com";
